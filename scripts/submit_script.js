@@ -1,9 +1,11 @@
 // Функция, проверяющая и валидирующая все поля
-let xValueField = document.querySelector(".form-field:first-child");
-let yValueField = document.querySelector(".form-field:nth-child(2)");
-let rValueField = document.querySelector(".form-field:last-child");
+
 function checkFields() {
     let isValid = true;
+
+    let xValueField = document.querySelector(".form-field:first-child");
+    let yValueField = document.querySelector(".form-field:nth-child(2)");
+    let rValueField = document.querySelector(".form-field:last-child");
 
     // Проверка значения x
     if (!xValuePressed()) {
@@ -51,12 +53,16 @@ document.querySelector(".submit-button").onclick = function (e) {
         url: 'check_hit.php',
         type: 'POST',
         data: {
-            x: getXValuePressed(),
+            x: getXValuePressed().textContent,
             y: document.querySelector(".form-field:nth-child(2) input").value,
             r: getRValuePressed()
         },
+        success: function () {
+            window.location.href = "http://localhost:63342/FirstWebLab/results.php?_ijt=g9a5ql0uejfn4pg60b35jujj0u&_ij_reload=RELOAD_ON_SAVE";
+        },
         error: function(){
-            console.log('ERROR');
+            window.alert("На данный момент сервер не может обработать ваш запрос - попробуйте позже " +
+                "(либо занесите в офис банку сгущенки - сразу починим)");
         }
     })
 }

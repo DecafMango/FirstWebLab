@@ -1,5 +1,5 @@
 <main>
-    <img src="images/field_image.png" alt="field_image">
+    <img class="field-image" src="images/field_image.png" alt="field_image">
     <div class="input-from-container">
         <h1 class="form-title">
             Попадите в выделенную область
@@ -53,8 +53,6 @@
         </div>
         <div class="form-buttons">
             <button class="submit-button" type="submit">Отправить</button>
-            <div class="divider">или</div>
-            <button class="link-button" type="button">Посмотреть предыдущие результаты</button>
         </div>
     </div>
 

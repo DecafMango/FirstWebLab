@@ -4,8 +4,8 @@ let xValueButtons = document.querySelectorAll("fieldset:first-child button");
 for (let xValueButton of xValueButtons) {
     xValueButton.onclick = function () {
         if (xValuePressed()) {
-            if (xValueButton.classList.contains("button-pressed"))
-                xValueButton.classList.remove("button-pressed");
+            getXValuePressed().classList.remove("button-pressed");
+            xValueButton.classList.add("button-pressed");
         } else
             xValueButton.classList.add("button-pressed");
     }
@@ -23,7 +23,7 @@ function xValuePressed() {
 function getXValuePressed() {
     for (let xValueButton of xValueButtons) {
         if (xValueButton.classList.contains("button-pressed"))
-            return xValueButton.textContent;
+            return xValueButton;
     }
     return null;
 }

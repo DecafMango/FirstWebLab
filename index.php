@@ -1,5 +1,5 @@
 <?php
-require_once "components/head.php";
-require_once "components/header.php";
-require_once "components/input_form.php";
-require_once "components/footer.php";
+require "components/head.php";
+require "components/header.php";
+require "components/input_form.php";
+require "components/footer.php";

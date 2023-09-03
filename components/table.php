@@ -1,5 +1,5 @@
-<a href="../index.php">Обратно</a>
-<table>
+<button class="return-button">Обратно на главную</button>
+<table class="result-table">
     <tr>
         <th>X</th>
         <th>Y</th>
@@ -10,11 +10,11 @@
     </tr>
     <?php
         function get_data() {
-            $connect_string = "host=localhost port=5433 dbname=WebDatabase password=qwerty123";
-            $db_connect = pg_connect($connect_string);
-            $query = "select * from results";
-            $query_result = pg_query($db_connect, $query);
-            return pg_fetch_all($query_result);
+                $connect_string = "host=localhost port=5433 dbname=WebDatabase password=qwerty123";
+                $db_connect = pg_connect($connect_string);
+                $query = "select * from results order by posted_date desc, posted_time desc";
+                $query_result = pg_query($db_connect, $query);
+                return pg_fetch_all($query_result);
         }
 
         $data = get_data();
@@ -40,4 +40,6 @@
         }
     ?>
 </table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../scripts/return_button_script.js"></script>
 <?php

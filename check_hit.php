@@ -52,11 +52,18 @@
     }
 
     // Функция для записи попытки в файл results.txt
-    function save_attempt_file($x, $y, $r, $posted_date, $posted_time, $is_hit) {
-        $file = fopen("results.txt", "a");
-        $row = $x . ";" . $y . ";" . $r . ";" . $posted_date . ";" . $posted_time . ";" . $is_hit . "\n";
-        fwrite($file, $row);
-        fclose($file);
+//    function save_attempt_file($x, $y, $r, $posted_date, $posted_time, $is_hit) {
+//        $file = fopen("results.txt", "a");
+//        $row = $x . ";" . $y . ";" . $r . ";" . $posted_date . ";" . $posted_time . ";" . $is_hit . "\n";
+//        fwrite($file, $row);
+//        fclose($file);
+//    }
+
+    // Проверка на то, что переданы все нужные ключи
+    if (!array_key_exists("x", $_POST) || !array_key_exists("y", $_POST) || !array_key_exists("r", $_POST)) {
+        http_response_code(400);
+        header("Location: index.php");
+        exit;
     }
 
     $x = intval($_POST["x"]);
@@ -65,14 +72,8 @@
     $posted_date = date("Y-m-d");
     $posted_time = date("H:i:s");
 
-    if (!$x || !$y || !$r) {
-        http_response_code(400);
-        header("Location: index.php");
-        exit;
-    }
 
     $is_hit = check_hit($x, $y, $r) ? 1 : 0;
     save_attempt($x, $y, $r, $posted_date, $posted_time, $is_hit);
-    save_attempt_file($x, $y, $r, $posted_date, $posted_time, $is_hit);
     http_response_code(200);
     exit;
