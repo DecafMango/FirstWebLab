@@ -51,7 +51,7 @@ set_error_handler("exception_error_handler");
 function save_attempt($x, $y, $r, $posted_date, $posted_time, $is_hit)
 {
     try {
-        $connect_string = "host=localhost port=5433 dbname=WebDatabase password=qwerty123";
+        $connect_string = "host=localhost port=5433 dbname=WebDatabase";
         $db_connect = @pg_connect($connect_string);
         $query =
             "INSERT INTO results (x, y, r, posted_date, posted_time, is_hit)
@@ -85,6 +85,7 @@ $y = floatval($_POST["y"]);
 $r = intval($_POST["r"]);
 $posted_date = date("Y-m-d");
 $posted_time = date("H:i:s");
+
 
 
 $is_hit = check_hit($x, $y, $r) ? 1 : 0;

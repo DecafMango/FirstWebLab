@@ -9,15 +9,31 @@
         <th>Попадание</th>
     </tr>
     <?php
-        function get_data() {
-                $connect_string = "host=localhost port=5433 dbname=WebDatabase password=qwerty123";
-                $db_connect = pg_connect($connect_string);
-                $query = "select * from results order by posted_date desc, posted_time desc";
-                $query_result = pg_query($db_connect, $query);
-                return pg_fetch_all($query_result);
-        }
 
-        $data = get_data();
+    function exception_error_handler($errno, $errstr, $errfile, $errline)
+    {
+        throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+    }
+
+    set_error_handler("exception_error_handler");
+
+    function get_data()
+    {
+        try {
+            $connect_string = "host=localhost port=5433 dbname=WebDatabase";
+            $db_connect = @pg_connect($connect_string);
+            $query = "select * from results order by posted_date desc, posted_time desc";
+            $query_result = pg_query($db_connect, $query);
+            return pg_fetch_all($query_result);
+        } catch (Exception $e) {
+            echo "<h2 class=\"error-text\">На данный момент сервер не способен обработать ваш запрос</h2>";
+            return null;
+        }
+    }
+
+    $data = get_data();
+
+    if ($data != null) {
 
         foreach ($data as $index => $row) {
             $x = $row["x"];
@@ -38,8 +54,9 @@
                 </tr>
             ";
         }
+    }
     ?>
 </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../scripts/return_button_script.js"></script>
+<script src="scripts/return_button_script.js"></script>
 <?php

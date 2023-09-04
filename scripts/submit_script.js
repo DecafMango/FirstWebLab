@@ -1,5 +1,4 @@
 // Функция, проверяющая и валидирующая все поля
-
 function checkFields() {
     let isValid = true;
 
@@ -58,7 +57,7 @@ document.querySelector(".submit-button").onclick = function (e) {
             r: getRValuePressed()
         },
         success: function () {
-            window.location.href = "http://localhost:63342/FirstWebLab/results.php?_ijt=g9a5ql0uejfn4pg60b35jujj0u&_ij_reload=RELOAD_ON_SAVE";
+            window.location.href = "http://localhost:63342/FirstWebLab/results.php";
         },
         error: function(){
             window.alert("На данный момент сервер не может обработать ваш запрос - попробуйте позже " +
